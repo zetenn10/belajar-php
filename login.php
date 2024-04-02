@@ -1,31 +1,19 @@
-<?php 
-
-require ('koneksi.php');
-include ('login.html');
-
-session_start();
-error_reporting(0);
-if (isset($_SESSION['nama'])) {
-   // header("Location: login.php");
-}
-
-if (isset($_POST['Login'])) {
-    $email = $_POST['email'];
-    $pass = $_POST['pass'];
- 
-    $sql = "SELECT * FROM user WHERE email ='$email' AND pass='$pass'";
-    $result = mysqli_query($mysqli, $sql);
-    $check = mysqli_num_rows($result);
-    if ($check > 0) {
-        $row = mysqli_fetch_assoc($result);
-        // $_SESSION['nama'] = $row['nama'];
-        $_SESSION['password'] = $row['password'];
-        $_SESSION['email'] = $row['email'];
-        echo "<script>alert('BERHASIL LOGIN!')</script>";
-        header("Location: home.php");
-    } else {
-        echo "<script>alert('Email atau password Anda salah. Silahkan coba lagi!')</script>";
-    }
-}
-
-?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="login-container">
+        <h2>Login</h2>
+        <form action="dashboard.php" method="POST">
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+</body>
+</html>
